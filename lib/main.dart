@@ -12,7 +12,7 @@ import 'features/add_product/presentation/controller/add_product_bloc.dart';
 import 'features/products/presentation/controller/products_bloc.dart';
 
 void main() async {
-  _init();
+  await _init();
   runApp(const MyApp());
 }
 

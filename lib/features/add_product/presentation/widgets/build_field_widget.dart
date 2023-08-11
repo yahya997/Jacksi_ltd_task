@@ -3,9 +3,10 @@ import 'package:jacksi_ltd_task/core/widgets/custom_text_filed.dart';
 import 'package:jacksi_ltd_task/core/widgets/custom_text_widget.dart';
 
 class BuildFieldWidget extends StatelessWidget {
-  const BuildFieldWidget({super.key, required this.title});
+  const BuildFieldWidget({super.key, required this.title, required this.textEditingController});
 
   final String title;
+  final TextEditingController textEditingController;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,7 @@ class BuildFieldWidget extends StatelessWidget {
         ),
         CustomTextField(
           hint: title,
+          controller: textEditingController,
         )
       ],
     );

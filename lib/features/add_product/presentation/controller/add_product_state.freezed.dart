@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AddProductState {
   List<Uint8List> get images => throw _privateConstructorUsedError;
+  List<ProductModel> get products => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddProductStateCopyWith<AddProductState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $AddProductStateCopyWith<$Res> {
           AddProductState value, $Res Function(AddProductState) then) =
       _$AddProductStateCopyWithImpl<$Res, AddProductState>;
   @useResult
-  $Res call({List<Uint8List> images});
+  $Res call({List<Uint8List> images, List<ProductModel> products});
 }
 
 /// @nodoc
@@ -46,12 +47,17 @@ class _$AddProductStateCopyWithImpl<$Res, $Val extends AddProductState>
   @override
   $Res call({
     Object? images = null,
+    Object? products = null,
   }) {
     return _then(_value.copyWith(
       images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<Uint8List>,
+      products: null == products
+          ? _value.products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<ProductModel>,
     ) as $Val);
   }
 }
@@ -64,7 +70,7 @@ abstract class _$$_AddProductStateCopyWith<$Res>
       __$$_AddProductStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Uint8List> images});
+  $Res call({List<Uint8List> images, List<ProductModel> products});
 }
 
 /// @nodoc
@@ -79,12 +85,17 @@ class __$$_AddProductStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? images = null,
+    Object? products = null,
   }) {
     return _then(_$_AddProductState(
       images: null == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
               as List<Uint8List>,
+      products: null == products
+          ? _value._products
+          : products // ignore: cast_nullable_to_non_nullable
+              as List<ProductModel>,
     ));
   }
 }
@@ -92,8 +103,11 @@ class __$$_AddProductStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AddProductState implements _AddProductState {
-  const _$_AddProductState({final List<Uint8List> images = const []})
-      : _images = images;
+  const _$_AddProductState(
+      {final List<Uint8List> images = const [],
+      final List<ProductModel> products = const []})
+      : _images = images,
+        _products = products;
 
   final List<Uint8List> _images;
   @override
@@ -104,9 +118,18 @@ class _$_AddProductState implements _AddProductState {
     return EqualUnmodifiableListView(_images);
   }
 
+  final List<ProductModel> _products;
+  @override
+  @JsonKey()
+  List<ProductModel> get products {
+    if (_products is EqualUnmodifiableListView) return _products;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_products);
+  }
+
   @override
   String toString() {
-    return 'AddProductState(images: $images)';
+    return 'AddProductState(images: $images, products: $products)';
   }
 
   @override
@@ -114,12 +137,15 @@ class _$_AddProductState implements _AddProductState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AddProductState &&
-            const DeepCollectionEquality().equals(other._images, _images));
+            const DeepCollectionEquality().equals(other._images, _images) &&
+            const DeepCollectionEquality().equals(other._products, _products));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_images));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_images),
+      const DeepCollectionEquality().hash(_products));
 
   @JsonKey(ignore: true)
   @override
@@ -129,11 +155,14 @@ class _$_AddProductState implements _AddProductState {
 }
 
 abstract class _AddProductState implements AddProductState {
-  const factory _AddProductState({final List<Uint8List> images}) =
-      _$_AddProductState;
+  const factory _AddProductState(
+      {final List<Uint8List> images,
+      final List<ProductModel> products}) = _$_AddProductState;
 
   @override
   List<Uint8List> get images;
+  @override
+  List<ProductModel> get products;
   @override
   @JsonKey(ignore: true)
   _$$_AddProductStateCopyWith<_$_AddProductState> get copyWith =>

@@ -22,3 +22,17 @@ class RemoveImageEvent extends AddProductEvent {
   List<Object> get props => [image];
 
 }
+
+class AddNewProduct extends AddProductEvent{
+  final String productName;
+  final String productPrice;
+  final String storeName;
+  final String category;
+
+  const AddNewProduct({
+    required this.productName,
+    required this.productPrice,
+    required this.storeName,
+    required this.category,
+  });
+}

@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:jacksi_ltd_task/core/hive/hive_controller.dart';
+import 'package:jacksi_ltd_task/core/hive/product_model.dart';
 import 'package:jacksi_ltd_task/core/themes/colors.dart';
 import 'package:jacksi_ltd_task/core/themes/images.dart';
 import 'package:jacksi_ltd_task/core/widgets/custom_app_bar.dart';
@@ -63,33 +66,40 @@ class ProductsScreen extends StatelessWidget {
                     BuildCategoryItem(category: categories[index])),
           ),
           const BuildChangeDisplayProducts(),
-          BlocBuilder<ProductsBloc, ProductsState>(
-            builder: (context, state) {
-              if (state.gridViewDisplay) {
-                return GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 170.w / 180.h,
-                      mainAxisSpacing: 12,
-                      crossAxisSpacing: 8),
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return const BuildProductItemGrid();
-                  },
-                );
-              } else{
-                return ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return const BuildProductItem();
-                  },
-                );
-              }
-            },
+          ValueListenableBuilder(
+            valueListenable: HiveController.getProductList().listenable(),
+            builder: (context, box, child) {
+              final products = box.values.toList().cast<ProductModel>();
+              log('products => $products');
+              return BlocBuilder<ProductsBloc, ProductsState>(
+                builder: (context, state) {
+                  if (state.gridViewDisplay) {
+                    return GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 170.w / 180.h,
+                          mainAxisSpacing: 12,
+                          crossAxisSpacing: 8),
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: products.length,
+                      itemBuilder: (context, index) {
+                        return BuildProductItemGrid(product: products[index]);
+                      },
+                    );
+                  } else{
+                    return ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: products.length,
+                      itemBuilder: (context, index) {
+                        return BuildProductItem(product: products[index]);
+                      },
+                    );
+                  }
+                },
+              );
+            }
           )
         ],
       ),
